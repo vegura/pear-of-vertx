@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Title</title>
+</head>
+<body>
+  <div id="avg"></div>
+  <div id="main"></div>
+  <script>
+    const sse = new EventSource("/sse");
+    const main = document.getElementById("main");
+    const avg = document.getElementById("avg");
+
+    sse.addEventListener("update", (event) => {
+      const data = JSON.parse(event.data);
+      let div = document.getElementById(data.id);
+
+      if (div === null) {
+        div = document.createElement("div");
+        div.setAttribute("id", data.id);
+        main.appendChild(div);
+      }
+
+      div.innerHTML = `<strong>${data.temp.toFixed(2)}</strong> <em>${data.id}</em>`
+    })
+
+    sse.addEventListener("average", (event) => {
+      const data = JSON.parse(event.data);
+      avg.innerText = `Average = ${data.average.toFixed(2)}`
+    })
+  </script>
+</body>
+</html>
