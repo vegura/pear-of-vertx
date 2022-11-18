@@ -63,7 +63,7 @@ tasks.withType<JavaExec> {
 }
 
 tasks.create<JavaExec>("runCustom") {
-  main = project.properties.getOrDefault("mainClass", "me.vegura.verticles_test.heat_sensor.Main") as String
+  main = project.properties.getOrDefault("mainClass", "me.vegura.verticles_test.music_streaming.Main") as String
   classpath = sourceSets["main"].runtimeClasspath
   systemProperties["vertx.logger-delegate-factory-class-name"] = "io.vertx.core.logging.SLF4JLogDelegateFactory"
 }
