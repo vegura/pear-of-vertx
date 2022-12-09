@@ -18,6 +18,7 @@ val vertxVersion = "4.3.4"
 val junitJupiterVersion = "5.7.0"
 val logBackVersion = "1.2.3"
 val infiniSpanVersion = "4.3.4"
+val vertxWebClient = "4.3.4"
 
 val mainVerticleName = "me.vegura.verticles_test.MainVerticle"
 val launcherClassName = "io.vertx.core.Launcher"
@@ -32,6 +33,7 @@ application {
 dependencies {
   implementation(platform("io.vertx:vertx-stack-depchain:$vertxVersion"))
   implementation("io.vertx:vertx-core")
+  implementation("io.vertx:vertx-web-client:$vertxWebClient")
   implementation("ch.qos.logback:logback-classic:$logBackVersion")
   implementation("io.vertx:vertx-infinispan:$infiniSpanVersion")
   testImplementation("io.vertx:vertx-junit5")
@@ -63,7 +65,7 @@ tasks.withType<JavaExec> {
 }
 
 tasks.create<JavaExec>("runCustom") {
-  main = project.properties.getOrDefault("mainClass", "me.vegura.verticles_test.music_streaming.Main") as String
+  main = project.properties.getOrDefault("mainClass", "me.vegura.verticles_test.edge_service.Main") as String
   classpath = sourceSets["main"].runtimeClasspath
   systemProperties["vertx.logger-delegate-factory-class-name"] = "io.vertx.core.logging.SLF4JLogDelegateFactory"
 }
